@@ -7,11 +7,19 @@ using TMPro;
 public class WinPanelScript : MonoBehaviour
 {
     public TextMeshProUGUI winText;
+    public TextMeshProUGUI pointsOblong;
 
+    public string typeMode;
     public string winType;
 
     WritingUIScript writingUIScript;
     public GameObject writingUIS;
+
+    PronouneUIScript pronouneUIScript;
+    public GameObject pronouneUIS;
+
+    ArrangeUIScript arrangeUIScript;
+    public GameObject arrangeUIS;
 
     public GameObject banner1Star;
     public GameObject banner2Star;
@@ -21,7 +29,18 @@ public class WinPanelScript : MonoBehaviour
 
     void OnEnable()
     {
-        writingUIScript = writingUIS.GetComponent<WritingUIScript>();
+        if(typeMode == "writing")
+        {
+            writingUIScript = writingUIS.GetComponent<WritingUIScript>();
+        }
+        else if(typeMode == "pronunciation")
+        {
+            pronouneUIScript = pronouneUIS.GetComponent<PronouneUIScript>();
+        }
+        else if(typeMode == "arrange")
+        {
+            arrangeUIScript = arrangeUIS.GetComponent<ArrangeUIScript>();
+        }
 
         int num = Random.Range(0, 4);
 
@@ -36,6 +55,39 @@ public class WinPanelScript : MonoBehaviour
             Debug.Log(winDialog[num]);
 
             winText.text = winDialog[num];
+
+            if (typeMode == "writing")
+            {
+                if(writingUIScript.userScore == 3)
+                {
+                    pointsOblong.text = "+10 points";
+                    banner3Star.SetActive(true);
+                    banner2Star.SetActive(false);
+                    banner1Star.SetActive(false);
+                }
+                else if(writingUIScript.userScore == 2)
+                {
+                    pointsOblong.text = "+7 points";
+                    banner3Star.SetActive(false);
+                    banner2Star.SetActive(true);
+                    banner1Star.SetActive(false);
+                }
+                else if (writingUIScript.userScore == 1)
+                {
+                    pointsOblong.text = "+3 points";
+                    banner3Star.SetActive(false);
+                    banner2Star.SetActive(false);
+                    banner1Star.SetActive(true);
+                }
+            }
+            else if (typeMode == "pronunciation")
+            {
+
+            }
+            else if (typeMode == "arrange")
+            {
+
+            }
         }
         else if (winType == "unwin")
         {

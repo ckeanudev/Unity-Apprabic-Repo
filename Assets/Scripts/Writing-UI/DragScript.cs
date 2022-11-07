@@ -28,7 +28,7 @@ public class DragScript : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        Debug.Log("Drag Enabled ---------------------------------------");
+        //Debug.Log("Drag Enabled ---------------------------------------");
         indexCount = 0;
         
         Debug.Log(transform.position);
@@ -51,7 +51,7 @@ public class DragScript : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+        //Debug.Log("OnBeginDrag");
         canvasGroup.alpha = .8f;
         canvasGroup.blocksRaycasts = false;
     }
@@ -63,7 +63,7 @@ public class DragScript : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         indexCount = 0;
@@ -72,9 +72,10 @@ public class DragScript : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDOwn " + orderDrag.ToString());
+        //Debug.Log("OnPointerDOwn " + orderDrag.ToString());
         indexCount = indexCount + 1;
-        Debug.Log("Check1");
+        //Debug.Log("Check1");
+        traceContent.timerStartFunction();
     }
 
     private void Update()
@@ -92,52 +93,52 @@ public class DragScript : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
         if (other.gameObject.name == "Checkpoint1" && indexCount == 1)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check2");
+            //Debug.Log("Check2");
         }
         else if (other.gameObject.name == "Checkpoint2" && indexCount == 2)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check3");
+            //Debug.Log("Check3");
         }
         else if (other.gameObject.name == "Checkpoint3" && indexCount == 3)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check4");
+            //Debug.Log("Check4");
         }
         else if (other.gameObject.name == "Checkpoint4" && indexCount == 4)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check5");
+            //Debug.Log("Check5");
         }
         else if (other.gameObject.name == "Checkpoint5" && indexCount == 5)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check6");
+            //Debug.Log("Check6");
         }
         else if (other.gameObject.name == "Checkpoint6" && indexCount == 6)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check7");
+           //Debug.Log("Check7");
         }
         else if (other.gameObject.name == "Checkpoint7" && indexCount == 7)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check8");
+            //Debug.Log("Check8");
         }
         else if (other.gameObject.name == "Checkpoint8" && indexCount == 8)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check9");
+            //Debug.Log("Check9");
         }
         else if (other.gameObject.name == "Checkpoint9" && indexCount == 9)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check10");
+            //Debug.Log("Check10");
         }
         else if (other.gameObject.name == "Checkpoint10" && indexCount == 10)
         {
             indexCount = indexCount + 1;
-            Debug.Log("Check11");
+            //Debug.Log("Check11");
         }
 
     }

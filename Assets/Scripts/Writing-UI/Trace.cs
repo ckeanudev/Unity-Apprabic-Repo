@@ -26,10 +26,16 @@ public class Trace : MonoBehaviour
     WritingUIScript writingUIScript;
     public GameObject writingUIS;
 
+    public int averageCountTime;
+    float currentTime = 0;
+    float currentTimeStop = 0;
+    bool isTimerStart = false;
+    bool isTimerStop = false;
+
     void OnEnable()
     {
         writingUIScript = writingUIS.GetComponent<WritingUIScript>();
-
+        currentTime = 0;
         tracingPart1.SetActive(true);
         untraceIMG1.SetActive(true);
         traceIMG1.SetActive(false);
@@ -77,6 +83,51 @@ public class Trace : MonoBehaviour
         }
     }
 
+    public void timerStartFunction()
+    {
+        Debug.Log("Count Start!");
+        Debug.Log(currentTime.ToString());
+        isTimerStart = true;
+        isTimerStop = false;
+    }
+
+    public void timerStopFunction()
+    {
+        Debug.Log("Count Stop!");
+        isTimerStart = false;
+        isTimerStop = true;
+    }
+
+    void Update()
+    {
+        if(isTimerStart && !isTimerStop)
+        {
+            currentTime = currentTime += Time.deltaTime;
+        }
+        else if(isTimerStop && !isTimerStart)
+        {
+            currentTimeStop = currentTime;
+            Debug.Log(currentTimeStop.ToString());
+            isTimerStop = false;
+            isTimerStart = false;
+            if(currentTimeStop <= averageCountTime)
+            {
+                Debug.Log("3 Stars");
+                writingUIScript.userScore = 3;
+            }
+            else if (currentTimeStop > averageCountTime && currentTimeStop <= averageCountTime + (averageCountTime * 0.8))
+            {
+                Debug.Log("2 Stars");
+                writingUIScript.userScore = 2;
+            }
+            else if (currentTimeStop > averageCountTime + (averageCountTime * 0.8))
+            {
+                Debug.Log("1 Stars");
+                writingUIScript.userScore = 1;
+            }
+        }
+    }
+
     public void TracingCheck(int tracingPart)
     {
         if (tracingPart == 1)
@@ -90,6 +141,7 @@ public class Trace : MonoBehaviour
             }
             else
             {
+                timerStopFunction();
                 Debug.Log("NICE NICE NICE");
                 writingUIScript.showWinDialog = true;
                 writingUIScript.delayOnce = true;
@@ -106,6 +158,7 @@ public class Trace : MonoBehaviour
             }
             else
             {
+                timerStopFunction();
                 Debug.Log("NICE NICE NICE");
                 writingUIScript.showWinDialog = true;
                 writingUIScript.delayOnce = true;
@@ -122,6 +175,7 @@ public class Trace : MonoBehaviour
             }
             else
             {
+                timerStopFunction();
                 Debug.Log("NICE NICE NICE");
                 writingUIScript.showWinDialog = true;
                 writingUIScript.delayOnce = true;
@@ -138,7 +192,8 @@ public class Trace : MonoBehaviour
             }
             else
             {
-                Debug.Log("NICE NICE NICE");
+                timerStopFunction();
+                Debug.Log("NICE NICE NICE"); 
                 writingUIScript.showWinDialog = true;
                 writingUIScript.delayOnce = true;
             }
