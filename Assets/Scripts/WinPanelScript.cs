@@ -82,7 +82,27 @@ public class WinPanelScript : MonoBehaviour
             }
             else if (typeMode == "pronunciation")
             {
-
+                if (pronouneUIScript.userScore == 3)
+                {
+                    pointsOblong.text = "+10 points";
+                    banner3Star.SetActive(true);
+                    banner2Star.SetActive(false);
+                    banner1Star.SetActive(false);
+                }
+                else if (pronouneUIScript.userScore == 2)
+                {
+                    pointsOblong.text = "+7 points";
+                    banner3Star.SetActive(false);
+                    banner2Star.SetActive(true);
+                    banner1Star.SetActive(false);
+                }
+                else if (pronouneUIScript.userScore == 1)
+                {
+                    pointsOblong.text = "+3 points";
+                    banner3Star.SetActive(false);
+                    banner2Star.SetActive(false);
+                    banner1Star.SetActive(true);
+                }
             }
             else if (typeMode == "arrange")
             {

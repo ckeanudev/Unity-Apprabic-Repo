@@ -26,11 +26,19 @@ public class Pronounce : MonoBehaviour
     public GameObject choiceContainer2;
     public GameObject choiceContainer3;
 
+    public int averageCountTime;
+    float currentTime = 0;
+    float currentTimeStop = 0;
+    bool isTimerStart = false;
+    bool isTimerStop = false;
+
     void OnEnable()
     {
         int num = Random.Range(1, 4);
 
         pronouneUIScript = PronouneUIS.GetComponent<PronouneUIScript>();
+
+        currentTime = 0;
 
         audioContainer1.SetActive(false);
         audioContainer2.SetActive(false);
@@ -64,6 +72,7 @@ public class Pronounce : MonoBehaviour
     {
         firstPage.SetActive(false);
         secondPage.SetActive(true);
+        timerStartFunction();
     }
 
     public void OrigAudio()
@@ -89,7 +98,8 @@ public class Pronounce : MonoBehaviour
 
     public void OptionButtons(int num)
     {
-        if(num == 1)
+        timerStopFunction();
+        if (num == 1)
         {
             Debug.Log("NICE NICE NICE");
             pronouneUIScript.showWinDialog = true;
@@ -103,8 +113,53 @@ public class Pronounce : MonoBehaviour
             pronouneUIScript.delayOnce = true;
             pronouneUIScript.userAnswer = false;
         }
-    } 
+    }
 
+    public void timerStartFunction()
+    {
+        currentTime = 0;
+        Debug.Log("Count Start!");
+        Debug.Log(currentTime.ToString());
+        isTimerStart = true;
+        isTimerStop = false;
+    }
+
+    public void timerStopFunction()
+    {
+        Debug.Log("Count Stop!");
+        isTimerStart = false;
+        isTimerStop = true;
+    }
+
+    void Update()
+    {
+        if (isTimerStart && !isTimerStop)
+        {
+            currentTime = currentTime += Time.deltaTime;
+        }
+        else if (isTimerStop && !isTimerStart)
+        {
+            currentTimeStop = currentTime;
+            Debug.Log(currentTimeStop.ToString());
+            isTimerStop = false;
+            isTimerStart = false;
+            if (currentTimeStop <= 8)
+            {
+                Debug.Log("3 Stars");
+                pronouneUIScript.userScore = 3;
+            }
+            else if (currentTimeStop > 8 && currentTimeStop <= 12)
+            {
+                Debug.Log("2 Stars");
+                pronouneUIScript.userScore = 2;
+            }
+            else if (currentTimeStop > 12)
+            {
+                Debug.Log("1 Stars");
+                pronouneUIScript.userScore = 1;
+            }
+        }
+    }
 
 
 

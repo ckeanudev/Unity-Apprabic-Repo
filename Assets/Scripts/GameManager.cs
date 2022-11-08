@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
         mainPageNumber = page;
     }
 
-
     private void Update()
     {
         if (pageNumber == 0)
