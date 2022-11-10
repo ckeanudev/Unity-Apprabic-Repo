@@ -20,8 +20,13 @@ public class MainPageScript : MonoBehaviour
     public GameObject arrangePage; //--9
 
     public GameObject backButton;
+    public GameObject settingButton1;
+    public GameObject settingButton2;
+
+
     public TextMeshProUGUI topTitleText;
     public GameObject showUser;
+    public GameObject showSetting;
 
     GameManager gameManager;
     public GameObject gameM;
@@ -44,6 +49,8 @@ public class MainPageScript : MonoBehaviour
         arrangePage.SetActive(false);
 
         backButton.SetActive(false);
+        settingButton2.SetActive(false);
+        settingButton1.SetActive(true);
 
         MainPageRender();
     }
@@ -62,6 +69,18 @@ public class MainPageScript : MonoBehaviour
         else if (show == 0)
         {
             showUser.SetActive(false);
+        }
+    }
+
+    public void ShowSetting(int show)
+    {
+        if (show == 1)
+        {
+            showSetting.SetActive(true);
+        }
+        else if (show == 0)
+        {
+            showSetting.SetActive(false);
         }
     }
 
@@ -127,6 +146,9 @@ public class MainPageScript : MonoBehaviour
 
             topTitleText.text = "";
             backButton.SetActive(false);
+            settingButton2.SetActive(false);
+            settingButton1.SetActive(true);
+
         }
         else if (gameManager.mainPageNumber == 2)
         {
@@ -143,6 +165,9 @@ public class MainPageScript : MonoBehaviour
 
             topTitleText.text = "Write";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
         else if (gameManager.mainPageNumber == 3)
         {
@@ -159,6 +184,9 @@ public class MainPageScript : MonoBehaviour
 
             topTitleText.text = "Pronounce";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
         else if (gameManager.mainPageNumber == 4)
         {
@@ -173,8 +201,11 @@ public class MainPageScript : MonoBehaviour
             testMenu.SetActive(false);
             arrangePage.SetActive(false);
 
-            topTitleText.text = "Write: Alphabets";
+            topTitleText.text = "Write: Letters";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
         else if (gameManager.mainPageNumber == 5)
         {
@@ -191,6 +222,9 @@ public class MainPageScript : MonoBehaviour
 
             topTitleText.text = "Write: Numbers";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
         else if (gameManager.mainPageNumber == 6)
         {
@@ -205,8 +239,11 @@ public class MainPageScript : MonoBehaviour
             testMenu.SetActive(false);
             arrangePage.SetActive(false);
 
-            topTitleText.text = "Pronunciation Alphabets";
+            topTitleText.text = "Pronunciation: Letters";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
         else if (gameManager.mainPageNumber == 7)
         {
@@ -221,8 +258,10 @@ public class MainPageScript : MonoBehaviour
             testMenu.SetActive(false);
             arrangePage.SetActive(false);
 
-            topTitleText.text = "Pronunciation Numbers";
+            topTitleText.text = "Pronunciation: Numbers";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
         }
         else if (gameManager.mainPageNumber == 8)
         {
@@ -239,6 +278,9 @@ public class MainPageScript : MonoBehaviour
 
             topTitleText.text = "Pre-Test & Post-Test";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
         else if (gameManager.mainPageNumber == 9)
         {
@@ -255,6 +297,9 @@ public class MainPageScript : MonoBehaviour
 
             topTitleText.text = "Arrange";
             backButton.SetActive(true);
+            settingButton2.SetActive(true);
+            settingButton1.SetActive(false);
+
         }
     }
 

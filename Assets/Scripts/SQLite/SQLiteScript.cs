@@ -34,9 +34,28 @@ public class SQLiteScript : MonoBehaviour
         }
     }
 
-    public void LoadDB()
+    public void LoadUsersFromDB()
     {
 
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM users";
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                        Debug.Log(reader["userid"] + ")- " + reader["username"] + " / " + reader["avatarid"]);
+
+                    reader.Close();
+                }
+            }
+
+            connection.Close();
+        }
     }
 
     public void CreateNewUserApp(string username, int avatar) 
@@ -47,6 +66,7 @@ public class SQLiteScript : MonoBehaviour
 
             using(var command = connection.CreateCommand())
             {
+                Debug.Log("Inside Success!");
                 command.CommandText = "INSERT INTO users (username, avatarid, experience, pretestscore, posttestscore) VALUES ('" + username + "', " + avatar + ", 0, 0, 0)";
                 command.ExecuteNonQuery();
             }

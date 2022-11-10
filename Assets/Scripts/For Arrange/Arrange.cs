@@ -24,6 +24,11 @@ public class Arrange : MonoBehaviour
 
     public GameObject doneButton;
 
+    float currentTime = 0;
+    float currentTimeStop = 0;
+    bool isTimerStart = false;
+    bool isTimerStop = false;
+
     void OnEnable()
     {
         arrangeUIScript = arrangeUIS.GetComponent<ArrangeUIScript>();
@@ -40,10 +45,12 @@ public class Arrange : MonoBehaviour
         yield return new WaitForSeconds(3f);
         firstPage.SetActive(false);
         secondPage.SetActive(true);
+        timerStartFunction();
     }
 
     public void ArrangeDoneButton()
     {
+        timerStopFunction();
         doneButton.SetActive(false);
 
         if (firstPosition && secondPosition && thirdPosition && fourthPosition && fifthPosition)
@@ -71,6 +78,52 @@ public class Arrange : MonoBehaviour
         thirdPosition = false;
         fourthPosition = false;
         fifthPosition = false;
+    }
+
+    public void timerStartFunction()
+    {
+        Debug.Log("Count Start!");
+        Debug.Log(currentTime.ToString());
+        isTimerStart = true;
+        isTimerStop = false;
+    }
+
+    public void timerStopFunction()
+    {
+        Debug.Log("Count Stop!");
+        isTimerStart = false;
+        isTimerStop = true;
+    }
+
+    void Update()
+    {
+        if (isTimerStart && !isTimerStop)
+        {
+            currentTime = currentTime += Time.deltaTime;
+        }
+        else if (isTimerStop && !isTimerStart)
+        {
+            currentTimeStop = currentTime;
+            Debug.Log(currentTimeStop.ToString());
+            isTimerStop = false;
+            isTimerStart = false;
+
+            if (currentTimeStop <= 8)
+            {
+                Debug.Log("3 Stars");
+                arrangeUIScript.userScore = 3;
+            }
+            else if (currentTimeStop > 8 && currentTimeStop <= 13)
+            {
+                Debug.Log("2 Stars");
+                arrangeUIScript.userScore = 2;
+            }
+            else if (currentTimeStop > 13)
+            {
+                Debug.Log("1 Stars");
+                arrangeUIScript.userScore = 1;
+            }
+        }
     }
 
 }

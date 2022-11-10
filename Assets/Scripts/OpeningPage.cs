@@ -39,8 +39,8 @@ public class OpeningPage : MonoBehaviour
     public void GetAvatarID(int avatar)
     {
         avatarID = avatar;
-        Debug.Log(avatarID);
-        //sqliteScript.CreateNewUserApp(nameText, avatarID);
+        Debug.Log("AVARTAR ID: " + avatarID.ToString());
+        sqliteScript.CreateNewUserApp(nameText, avatarID);
         contentPage = 4;
     }
 
@@ -109,6 +109,7 @@ public class OpeningPage : MonoBehaviour
             chooseAvatarContent.SetActive(false);
             loadUsersContent.SetActive(false);
             loadingContent.SetActive(true);
+            sqliteScript.LoadUsersFromDB();
         }
     }
 
